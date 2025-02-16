@@ -1,7 +1,11 @@
 #include "register_machine.h"
 
-unsigned int interpret(const program_t program,
-                       unsigned int *restrict const registers) {
+/*
+  The result of interpreting the instructions is just a single step of the
+  program, so there is no sensible output.
+*/
+void interpret_instructions(const program_t program,
+                            unsigned long *const registers) {
   unsigned int current_instruction = 0;
   while (current_instruction < program.num_instructions) {
     switch (program.instructions[current_instruction].opcode) {
@@ -24,9 +28,9 @@ unsigned int interpret(const program_t program,
         }
         break;
       case HALT:
-        return registers[0];
+        return;
         break;
     }
   }
-  return registers[0];  // Erroneous halts are caught here.
+  return;  // Erroneous halts are caught here.
 };
