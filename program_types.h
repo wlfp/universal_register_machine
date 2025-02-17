@@ -1,5 +1,4 @@
-#ifndef PROGRAM_TYPES_H
-#define PROGRAM_TYPES_H
+#pragma once
 
 /*
   Used to define instruction types, following convention that increments are
@@ -20,16 +19,14 @@ typedef struct instruction {
   unsigned int register_index;
   unsigned int label1_index;
   unsigned int label2_index;
-} instruction;
+} instruction_t;
 
 typedef struct program {
-  instruction *instructions;
+  instruction_t *instructions;
   unsigned int num_instructions;
 } program_t;
 
 typedef struct argument_list {
   unsigned long *contents;
   unsigned short length;
-} argument_list;
-
-#endif
+} argument_list_t;

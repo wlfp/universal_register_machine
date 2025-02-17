@@ -33,4 +33,4 @@ void interpret_instructions(const program_t program,
     }
   }
   return;  // Erroneous halts are caught here.
-};
+}
