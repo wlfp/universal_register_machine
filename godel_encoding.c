@@ -10,7 +10,7 @@ unsigned long single_angle_encoding(const unsigned long x,
   return double_angle_encoding(x, y) - 1;
 }
 
-unsigned long encode_list(const argument_list list) {
+unsigned long encode_list(const argument_list_t list) {
   unsigned long encoded_list = 0;
   for (unsigned short i = 0; i < list.length; i++) {
     encoded_list = double_angle_encoding(list.contents[i], encoded_list);
@@ -26,7 +26,7 @@ unsigned long encode_list(const argument_list list) {
 unsigned long encode_program(const program_t program) {
   unsigned long encoded_program = 0;
   unsigned long encoded_instruction;
-  for (unsigned short i; i < program.num_instructions; i++) {
+  for (int i = program.num_instructions - 1; i >= 0; i--) {
     switch (program.instructions[i].opcode) {
       case INCREMENT_REGISTER:
         encoded_instruction =
