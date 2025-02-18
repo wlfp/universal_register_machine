@@ -4,6 +4,10 @@
 #define TEMP_REG REGISTER_Z_SCRATCH
 #define DUMMY_REG 999
 
+/*
+  PRECONDITION: src_reg = a natural number x, dest_reg = a natural number y.
+  POSTCONDITION: src_reg = x, dest_reg = x.
+*/
 #define NON_DESTRUCTIVE_COPY_MACRO(base, src_reg, dest_reg)                    \
   instructions[(base) + 0] = (instruction_t){                                  \
       DECREMENT_REGISTER_BRANCH, TEMP_REG, (base) + 0, (base) + 1};            \
@@ -21,6 +25,10 @@
       (instruction_t){INCREMENT_REGISTER, src_reg, (base) + 5, DUMMY_REG};     \
   instructions[(base) + 7] = (instruction_t){HALT, 999, 999, 999};
 
+/*
+  PRECONDITION: item_reg = a natural number x, list_reg = an encoded list.
+  POSTCONDITION: item_reg = 0, list_reg = <<x, encoded_list>>.
+*/
 #define PUSH_TO_LIST_MACRO(base, item_reg, list_reg)                        \
   instructions[(base) + 0] = (instruction_t){                               \
       DECREMENT_REGISTER_BRANCH, TEMP_REG, (base) + 0, (base) + 1};         \
@@ -38,6 +46,10 @@
       DECREMENT_REGISTER_BRANCH, item_reg, (base) + 2, (base) + 7};         \
   instructions[(base) + 7] = (instruction_t){HALT, 999, 999, 999};
 
+/*
+  PRECONDITION: list_reg empty (jump to exit_dest) or encodedlist <<x, l>>.
+  POSTCONDITION: list_reg = the encoded list l, dest_reg = x.
+*/
 #define POP_FROM_LIST_MACRO(base, list_reg, dest_reg, exit_dest)               \
   instructions[(base) + 0] = (instruction_t){                                  \
       DECREMENT_REGISTER_BRANCH, dest_reg, (base) + 0, (base) + 1};            \
