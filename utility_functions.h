@@ -1,6 +1,6 @@
-#define LEN_NON_DESTRUCTIVE_COPY 8
-#define LEN_PUSH_TO_LIST 8
-#define LEN_POP_FROM_LIST 11
+#define LEN_NON_DESTRUCTIVE_COPY 7
+#define LEN_PUSH_TO_LIST 7
+#define LEN_POP_FROM_LIST 10
 #define TEMP_REG REGISTER_Z_SCRATCH
 #define DUMMY_REG 999
 
@@ -22,8 +22,7 @@
   instructions[(base) + 5] = (instruction_t){                                  \
       DECREMENT_REGISTER_BRANCH, TEMP_REG, (base) + 6, (base) + 7};            \
   instructions[(base) + 6] =                                                   \
-      (instruction_t){INCREMENT_REGISTER, src_reg, (base) + 5, DUMMY_REG};     \
-  instructions[(base) + 7] = (instruction_t){HALT, 999, 999, 999};
+      (instruction_t){INCREMENT_REGISTER, src_reg, (base) + 5, DUMMY_REG};
 
 /*
   PRECONDITION: item_reg = a natural number x, list_reg = an encoded list.
@@ -43,8 +42,7 @@
   instructions[(base) + 5] =                                                \
       (instruction_t){INCREMENT_REGISTER, list_reg, (base) + 4, DUMMY_REG}; \
   instructions[(base) + 6] = (instruction_t){                               \
-      DECREMENT_REGISTER_BRANCH, item_reg, (base) + 2, (base) + 7};         \
-  instructions[(base) + 7] = (instruction_t){HALT, 999, 999, 999};
+      DECREMENT_REGISTER_BRANCH, item_reg, (base) + 2, (base) + 7};
 
 /*
   PRECONDITION: list_reg empty (jump to exit_dest) or encodedlist <<x, l>>.
@@ -70,5 +68,4 @@
   instructions[(base) + 8] =                                                   \
       (instruction_t){INCREMENT_REGISTER, list_reg, (base) + 9, DUMMY_REG};    \
   instructions[(base) + 9] =                                                   \
-      (instruction_t){INCREMENT_REGISTER, dest_reg, (base) + 4, DUMMY_REG};    \
-  instructions[(base) + 10] = (instruction_t){HALT, 999, 999, 999};
+      (instruction_t){INCREMENT_REGISTER, dest_reg, (base) + 4, DUMMY_REG};
