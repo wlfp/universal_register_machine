@@ -1,7 +1,8 @@
 #define LEN_NON_DESTRUCTIVE_COPY 7
 #define LEN_PUSH_TO_LIST 7
 #define LEN_POP_FROM_LIST 10
-#define TEMP_REG REGISTER_Z_SCRATCH
+// The TEMP_REG is REGISTER_Z_SCRATCH as in universal_register_machine.c
+#define TEMP_REG 9
 #define DUMMY_REG 999
 
 /*

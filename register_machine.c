@@ -2,7 +2,7 @@
 
 /*
   The result of interpreting the instructions is just a single step of the
-  program, so there is no sensible output.
+  program, so registers are mutated rather than returning an output.
 */
 void interpret_instructions(const program_t program,
                             unsigned long *const registers) {
