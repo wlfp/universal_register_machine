@@ -66,6 +66,6 @@
   instructions[(base) + 7] = (instruction_t){                                  \
       DECREMENT_REGISTER_BRANCH, TEMP_REG, (base) + 8, (base) + 10};           \
   instructions[(base) + 8] =                                                   \
-      (instruction_t){INCREMENT_REGISTER, list_reg, (base) + 9, DUMMY_REG};    \
+      (instruction_t){INCREMENT_REGISTER, list_reg, (base) + 6, DUMMY_REG};    \
   instructions[(base) + 9] =                                                   \
       (instruction_t){INCREMENT_REGISTER, dest_reg, (base) + 4, DUMMY_REG};
