@@ -20,6 +20,12 @@
 
 #define NUM_INSTRS_IN_URM 108
 
+/*
+ * Takes a Godel encoded program and arguments and simulates them according to
+ * the URM I designed. This URM is built of mini programs that I built as macros
+ * so that I could see the full instruction list of the program in one go, as it
+ * were.
+ */
 void simulate_machine(unsigned long program_to_simulate,
                       unsigned long arguments) {
   unsigned long registers[10] = {0};
@@ -47,7 +53,6 @@ void simulate_machine(unsigned long program_to_simulate,
       (instruction_t){INCREMENT_REGISTER, REGISTER_Z_SCRATCH, 55, 55};
   instructions[55] =
       (instruction_t){DECREMENT_REGISTER_BRANCH, REGISTER_Z_SCRATCH, 35, 35};
-  // This is hmm2
   instructions[56] =
       (instruction_t){INCREMENT_REGISTER, REGISTER_N_INSTRBODY, 57, 57};
   POP_FROM_LIST_MACRO(57, REGISTER_N_INSTRBODY, REGISTER_PROGRAM_COUNTER,
@@ -74,11 +79,6 @@ void simulate_machine(unsigned long program_to_simulate,
   POP_FROM_LIST_MACRO(97, REGISTER_ARGS, REGISTER_ZERO, 107)  // +10.
   instructions[107] = (instruction_t){HALT, 107, 107, 107};
 
-  // instruction_t instructions2[2];
-  // instructions2[0] = (instruction_t){INCREMENT_REGISTER, 0, 1, 1};
-  // instructions2[1] = (instruction_t){HALT, 1, 1, 1};
-  // program_t sim_fake_test = {instructions2, 2};
-
   program_t simulator = {instructions, NUM_INSTRS_IN_URM};
   interpret_instructions(simulator, registers);
   printf("The output of simulating the machine is %lu.\n",
@@ -87,24 +87,10 @@ void simulate_machine(unsigned long program_to_simulate,
 
 int main(int argc, char **argv) {
   if (argc != 3) {
-    perror(
-        "Please supply <program.txt> and <arguments.txt> according to the "
-        "formats in README.md.\n");
+    perror("Please supply a Godel encoded program and arguments list.\n");
     return EXIT_FAILURE;
   }
 
-  // program_t program = parse_program_from_txt_file(argv[1]);
-  // if (program.instructions == NULL) {
-  //   perror("Failed to parse the program txtfile.");
-  //   return EXIT_FAILURE;
-  // }
-  // argument_list arguments = parse_arguments_from_txt_file(argv[2]);
-  // if (arguments.contents == NULL) {
-  //   perror("Failed to parse the arguments txtfile.");
-  //   return EXIT_FAILURE;
-  // }
-  // unsigned long encoded_program = encode_program(program),
-  //               encoded_arguments = encode_list(arguments);
   unsigned long encoded_program = strtol(argv[1], NULL, 10),
                 encoded_arguments = strtol(argv[2], NULL, 10);
   simulate_machine(encoded_program, encoded_arguments);

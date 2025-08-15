@@ -29,7 +29,6 @@ void interpret_instructions(const program_t program,
         break;
       case HALT:
         return;
-        break;
     }
   }
   return;  // Erroneous halts are caught here.
