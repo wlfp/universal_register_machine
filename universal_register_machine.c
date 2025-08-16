@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 #include "godel_encoding.h"
-#include "parser.h"
 #include "program_types.h"
 #include "register_machine.h"
 #include "utility_functions.h"
